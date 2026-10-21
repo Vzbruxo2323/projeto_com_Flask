@@ -1,5 +1,5 @@
 
-from flask import Flask, request
+from flask import Flask, request, render_template
 from markupsafe import escape
 
 app = Flask(__name__)
@@ -15,9 +15,12 @@ def Hello_pessoa():
 
 @app.route("/usuario/<username>")
 def home_usuario(username):
-    return f'<p>Usuário:{escape(username)}</p>'
+    return f'<p>Usuário: {escape(username)}</p>'
 
 @app.route("/ola/")
 @app.route("/ola/<nome>")
-def ola_nome(nome = None):
+def ola_nome(nome=None):
     return render_template('ola.html', nome=nome)
+
+if __name__ == "__main__":
+    app.run(debug=True, port=5000)
